@@ -1,12 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>독서모임 방</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <section class="phone" aria-label="독서모임 방 페이지">
+        <img class="roof" src="./asset/roof.png" alt="" />
 
+        <div class="title" id="roomTitle">독서모임</div>
+
+        <div class="book-wrap" style="margin-top: 22px">
+          <div class="book-dot" aria-hidden="true"></div>
+          <div style="display: grid; justify-items: center">
+            <div class="subtitle" id="roomSubtitle">1월</div>
+
+            <button class="book-card" id="bookBtn" type="button" aria-label="현재 읽는 책">
+              <div id="bookMount"></div>
+            </button>
+
+            <div class="hint" id="bookMetaLine">책을 눌러<br />좋았던 페이지를 공유하세요</div>
+
+            <div class="book-actions">
+              <button class="btn primary" id="btnSearchBook" type="button">책 검색/추가</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="members" aria-label="참여자 목록">
+          <div id="membersMount"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 리뷰 모달 -->
+    <div class="modal-backdrop" id="reviewModal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal">
+        <h2 id="reviewTitle">리뷰</h2>
+        <div id="reviewReadOnlyHint" style="display:none;opacity:.8;letter-spacing:.18em;font-size:12px;line-height:1.5;">
+          다른 사람의 리뷰는 조회만 가능해요.
+        </div>
+
+        <div class="row">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="font-size:12px;letter-spacing:.25em;opacity:.8;">별점</div>
+            <div class="stars" id="starsMount" aria-label="별점 선택"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="oneLineInput">한줄평</label>
+          <textarea id="oneLineInput" placeholder="한줄평을 입력하세요"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="pageInput">읽는 페이지</label>
+          <input id="pageInput" type="number" min="0" step="1" placeholder="0" />
+        </div>
+
+        <div class="actions">
+          <button class="btn" type="button" data-modal-close="reviewModal">닫기</button>
+          <button class="btn primary" id="saveReviewBtn" type="button">저장</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 책 검색 모달 -->
+    <div class="modal-backdrop" id="bookModal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal">
+        <h2>책 검색</h2>
+        <form id="bookSearchForm">
+          <div class="field">
+            <label for="bookQuery">검색어</label>
+            <input id="bookQuery" type="text" placeholder="예: 데미안, 소년이 온다" />
+          </div>
+          <div class="actions" style="justify-content: space-between;">
+            <button class="btn" type="button" data-modal-close="bookModal">닫기</button>
+            <button class="btn primary" type="submit">검색</button>
+          </div>
+        </form>
+        <div class="results" id="bookResults" aria-label="검색 결과"></div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

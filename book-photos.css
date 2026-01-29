@@ -1,0 +1,340 @@
+/* 책 - 좋았던 페이지 (Figma 기준) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+/* 데스크탑: 가운데 모바일 프레임 */
+.page-root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.book-photos-frame {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 헤더 */
+.roof-img {
+  width: 100%;
+  display: block;
+}
+
+.photos-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  padding-top: max(12px, env(safe-area-inset-top));
+  position: relative;
+  z-index: 2;
+}
+
+.back-btn {
+  all: unset;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 4px 8px;
+  color: #fff;
+}
+
+.photos-title {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.45em;
+  margin: 0;
+  color: #fff;
+  flex: 1;
+}
+
+/* 콘텐츠 영역 - 빈 상태/캐러셀 공통 높이 (속지 위치 고정) */
+.content-area {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+/* 캐러셀 - 속지 붙은 화면들이 슥슥 스와이프되며 딱딱 떨어지는 느낌 */
+.carousel-wrap {
+  position: absolute;
+  inset: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  padding: 0 0 80px;
+}
+
+.carousel-wrap.hidden {
+  display: none;
+}
+
+.carousel-track {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  min-width: 100%;
+  height: 100%;
+}
+
+.carousel-slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+}
+
+/* 노트 속지 - 고정 y축 (top: 50% + translateY), 빈/채움 동일 위치 */
+.note-sheet {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 55vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* 홀수번째: oddpage - 오른쪽 마진 0, 화면 오른쪽에 딱 붙음 */
+.note-sheet-odd {
+  right: 0;
+  left: auto;
+  background-image: url("./assets/oddpage.png");
+  background-position: right center;
+}
+
+/* 짝수번째: evenpage - 왼쪽 마진 0, 화면 왼쪽에 딱 붙음 */
+.note-sheet-even {
+  left: 0;
+  right: auto;
+  background-image: url("./assets/evenpage.png");
+  background-position: left center;
+}
+
+/* 사진 + 페이지 입력 - 노트 속지 안에 붙어서 같이 스와이프됨 */
+.note-sheet .slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.note-sheet .slide-photo {
+  max-width: 70%;
+  max-height: 70%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 사진 밑 페이지 텍스트 (팝업에서 입력한 값 표시) */
+.slide-page-text {
+  font-size: 14px;
+  color: #000;
+  font-weight: 300;
+}
+
+/* 페이지 입력 팝업 (qpopup.png 배경) */
+.page-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.page-popup-overlay.hidden {
+  display: none;
+}
+
+.page-popup {
+  position: relative;
+  width: 90%;
+  max-width: 320px;
+}
+
+.page-popup-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+.page-popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.page-popup-input-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.page-popup-input {
+  width: 64px;
+  padding: 0 4px 6px;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-size: 16px;
+  color: #000;
+  text-align: center;
+}
+
+.page-popup-input:focus {
+  outline: none;
+}
+
+.page-popup-unit {
+  font-size: 16px;
+  color: #000;
+  font-weight: 500;
+}
+
+.page-popup-confirm {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  line-height: 0;
+  margin-bottom: 10px;
+}
+
+.page-popup-confirm img {
+  display: block;
+  width: auto;
+  height: auto;
+  transform: scale(0.25);
+  transform-origin: center center;
+}
+
+/* 빈 상태 - content-area와 동일 영역, 속지 위치 고정 */
+.empty-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 80px;
+  text-align: center;
+}
+
+.empty-state.hidden {
+  display: none;
+}
+
+/* 빈 상태 속지 = 캐러셀 속지와 동일 위치 (같은 content-area 기준) */
+.empty-state .note-sheet {
+  right: 0;
+  left: auto;
+  background-image: url("./assets/oddpage.png");
+  background-position: right center;
+}
+
+/* 속지 위 +버튼·안내 영역 (피그마 기준) */
+.sheet-add-zone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.add-photo-btn {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  line-height: 0;
+}
+
+.add-photo-btn img {
+  display: block;
+  width: auto;
+  height: auto;
+  transform: scale(0.25);
+  transform-origin: center center;
+}
+
+.add-hint {
+  color: #000;
+  font-family: Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin: 0;
+}
+
+/* 페이지 인디케이터 (1/4 등) */
+.page-indicator {
+  position: absolute;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.page-indicator.hidden {
+  display: none;
+}
+

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>독서모임 방 상세</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-root">
+      <!-- 임시: 계정 전환 스위치 (나중에 제거) -->
+      <div class="account-switch">
+        <button type="button" class="account-switch-btn" id="btnViewAsMe">나로 보기</button>
+        <button type="button" class="account-switch-btn" id="btnViewAsFriend">친구로 보기</button>
+      </div>
+
+      <main class="app-frame" aria-label="독서모임 방 상세 페이지">
+        <img src="./assets/roof.png" alt="" class="roof-img" />
+
+        <header class="room-header">
+          <h1 class="room-title" id="roomTitle">독서모임</h1>
+        </header>
+
+        <!-- 책 섹션 -->
+        <section class="book-section" aria-label="현재 읽는 책">
+          <button
+            type="button"
+            class="book-cover-btn"
+            id="bookButton"
+            aria-label="현재 책"
+          >
+            <div class="book-cover" id="bookCover"></div>
+          </button>
+          <p class="book-hint">
+            책을 눌러<br />
+            좋았던 페이지를 공유하세요
+          </p>
+          <div class="book-actions">
+            <button type="button" class="btn btn-primary">책 검색</button>
+          </div>
+        </section>
+
+        <!-- 참여자 섹션 -->
+        <section class="members-section" aria-label="참여자 목록">
+          <ul class="members-list" id="membersList"></ul>
+        </section>
+      </main>
+
+      <!-- 멤버 상세 Bottom Sheet -->
+      <div
+        class="sheet-backdrop"
+        id="sheetBackdrop"
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="sheet">
+          <div class="sheet-header">
+            <h2 class="sheet-title" id="sheetTitle">멤버의 기록</h2>
+            <button type="button" class="sheet-close-btn" id="sheetClose">
+              닫기
+            </button>
+          </div>
+
+          <div
+            id="readOnlyHint"
+            style="display: none; font-size: 11px; color: rgba(255,255,255,0.7); margin-bottom: 8px; letter-spacing: 0.15em;"
+          >
+            다른 그룹원의 기록은 조회만 가능합니다.
+          </div>
+
+          <div class="sheet-row">
+            <div class="sheet-section-title">상태</div>
+            <div id="statusLabel" style="font-size: 12px;"></div>
+          </div>
+
+          <div class="sheet-row">
+            <div class="sheet-section-title">현재 페이지</div>
+            <input
+              type="number"
+              min="0"
+              id="pageInput"
+              class="input"
+              placeholder="예: 120"
+            />
+          </div>
+
+          <div class="sheet-row">
+            <div class="sheet-section-title">좋았던 페이지 사진</div>
+            <input
+              type="file"
+              id="photoInput"
+              accept="image/*"
+              multiple
+              style="font-size: 11px; color: #e5e7eb;"
+            />
+            <div class="photo-grid" id="photoGrid"></div>
+          </div>
+
+          <div class="sheet-row">
+            <div class="sheet-section-title">별점 (완독 후)</div>
+            <div class="star-row">
+              <button type="button" class="star-btn" data-value="1">★</button>
+              <button type="button" class="star-btn" data-value="2">★</button>
+              <button type="button" class="star-btn" data-value="3">★</button>
+              <button type="button" class="star-btn" data-value="4">★</button>
+              <button type="button" class="star-btn" data-value="5">★</button>
+            </div>
+          </div>
+
+          <div class="sheet-row">
+            <div class="sheet-section-title">한줄평</div>
+            <textarea
+              id="commentInput"
+              class="textarea"
+              placeholder="이 책에 대한 한줄평을 남겨주세요."
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            class="sheet-footer-btn secondary"
+            id="btnMarkFinished"
+          >
+            완독으로 변경
+          </button>
+          <button
+            type="button"
+            class="sheet-footer-btn primary"
+            id="btnSaveReview"
+          >
+            리뷰 저장
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
+

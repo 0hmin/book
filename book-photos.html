@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>좋았던 페이지</title>
+    <link rel="stylesheet" href="./book-photos.css" />
+  </head>
+  <body>
+    <div class="page-root">
+      <div class="book-photos-frame">
+        <img src="./assets/roof.png" alt="" class="roof-img" />
+        <header class="photos-header">
+          <button type="button" class="back-btn" id="backBtn" aria-label="뒤로">←</button>
+          <h1 class="photos-title" id="photosTitle">좋았던 페이지</h1>
+        </header>
+        <input type="file" id="photoInput" accept="image/*" multiple hidden />
+
+        <!-- 속지/캐러셀 공통 영역 - 높이 고정으로 Y축 위치 일치 -->
+        <div class="content-area">
+          <!-- 사진이 있을 때: 스와이프 캐러셀 -->
+          <div class="carousel-wrap" id="carouselWrap">
+            <div class="carousel-track" id="carouselTrack"></div>
+          </div>
+
+          <!-- 사진이 없을 때: 속지 위에 +버튼과 안내 -->
+          <div class="empty-state" id="emptyState">
+            <div class="note-sheet note-sheet-odd"></div>
+            <div class="sheet-add-zone">
+              <button type="button" class="add-photo-btn" aria-label="사진 추가"><img src="./assets/plusbt.png" alt="" /></button>
+              <p class="add-hint">좋았던 페이지를 공유해보세요</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 페이지 인디케이터 (1/4 등) -->
+        <div class="page-indicator" id="pageIndicator"></div>
+      </div>
+    </div>
+
+    <!-- 페이지 입력 팝업 (qpopup.png 배경) -->
+    <div class="page-popup-overlay hidden" id="pagePopupOverlay">
+      <div class="page-popup" id="pagePopup">
+        <img src="./assets/qpopup.png" alt="" class="page-popup-img" />
+        <div class="page-popup-content">
+          <div class="page-popup-input-wrap">
+            <input type="text" class="page-popup-input" id="pagePopupInput" placeholder="" inputmode="numeric" maxlength="6" />
+            <span class="page-popup-unit">P</span>
+          </div>
+          <button type="button" class="page-popup-confirm" id="pagePopupConfirm" aria-label="확인"><img src="./assets/checkbt.png" alt="" /></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./book-photos.js"></script>
+  </body>
+</html>

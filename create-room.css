@@ -1,0 +1,138 @@
+/* 방 만들기 페이지 (Figma 기준) */
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 200;
+  src: local("Pretendard ExtraLight"), local("Pretendard-ExtraLight");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: #000;
+  font-family: "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  color: #fff;
+}
+
+.page-root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.create-room-frame {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.create-room-content {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 1;
+}
+
+.create-room-title {
+  margin: 0 0 32px;
+  text-align: center;
+  color: #fff;
+font-family: "Pretendard";
+font-size: 20px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+letter-spacing: 6px;
+}
+
+.create-room-input-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.create-room-input {
+  width: 100%;
+  max-width: 200px;
+  padding: 0 0 8px;
+  border: none;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.8);
+  background: transparent;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+}
+
+.create-room-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.create-room-input:focus {
+  outline: none;
+  border-bottom-color: rgba(255, 255, 255, 1);
+}
+
+.create-room-hint {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.create-room-btn {
+  all: unset;
+  cursor: pointer;
+  padding: 12px 30px;
+  border: 1px solid #fff;
+  font-size: 16px;
+  font-weight: 300;
+  color: #fff;
+  background: transparent;
+}
+
+.create-room-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 화면 하단 bookbg.png */
+.create-room-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+
+.bookbg-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom;
+}

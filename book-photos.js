@@ -6,14 +6,22 @@ function $(sel) {
   return document.querySelector(sel);
 }
 
+// 멤버별 지정 색상 (app.js와 동일 풀)
+const MEMBER_COLORS = ["#F95100", "#FEB8DD", "#8686FE", "#05D88F", "#037B93", "#FBC736"];
+function getMemberColor(memberId) {
+  const index = (memberId || "").charCodeAt((memberId || "").length - 1) % MEMBER_COLORS.length;
+  return MEMBER_COLORS[index];
+}
+
 function getPhotosData() {
   try {
     const raw = sessionStorage.getItem("bookPhotosData");
     if (raw) {
-      return JSON.parse(raw);
+      const data = JSON.parse(raw);
+      return { roomId: data.roomId, photos: data.photos || [], roomTitle: data.roomTitle || "독서모임", currentUserId: data.currentUserId };
     }
   } catch (_) {}
-  return { photos: [], roomTitle: "독서모임", currentUserId: null };
+  return { roomId: null, photos: [], roomTitle: "독서모임", currentUserId: null };
 }
 
 function savePhotosData(data) {
@@ -100,12 +108,19 @@ function render() {
         const isOdd = i % 2 === 0;
         const sheetClass = isOdd ? "note-sheet-odd" : "note-sheet-even";
         const src = typeof p === "string" ? p : p.src;
+        const memberId = p && p.memberId ? p.memberId : "";
+        const user = getUser(memberId);
+        const nickname = user?.nickname || memberId || "?";
+        const color = getMemberColor(memberId);
         const pageNum = (p && p.pageNum !== undefined && p.pageNum !== "") ? p.pageNum : "";
         const pageText = pageNum ? `${pageNum} P` : "";
+        const chipPosClass = isOdd ? "slide-nickname-chip-odd" : "slide-nickname-chip-even";
         return `
       <div class="carousel-slide" data-photo-index="${i}">
         <div class="note-sheet ${sheetClass}">
+          <div class="slide-nickname-chip ${chipPosClass}" style="background: ${color}">${nickname}</div>
           <div class="slide-content">
+            ${pageText ? '<div class="slide-photo-spacer"></div>' : ""}
             <img src="${src}" alt="공유된 페이지" class="slide-photo" />
             ${pageText ? `<div class="slide-page-text">${pageText}</div>` : ""}
           </div>
@@ -144,7 +159,7 @@ function wireEvents() {
     if (window.history.length > 1) {
       window.history.back();
     } else {
-      window.location.href = "index.html";
+      window.location.href = "room.html";
     }
   });
 
@@ -155,8 +170,8 @@ function wireEvents() {
   });
 
   photoInput?.addEventListener("change", (e) => {
-    const files = Array.from(e.target.files || []);
-    files.forEach((file) => addPhoto(file));
+    const file = e.target.files?.[0];
+    if (file) addPhoto(file);
     e.target.value = "";
   });
 

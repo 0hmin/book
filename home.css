@@ -1,0 +1,155 @@
+/* 독서모임 홈 - 배경 + 책 인덱스 UI */
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 200;
+  src: local("Pretendard ExtraLight"), local("Pretendard-ExtraLight");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: #f3f4f6;
+  font-family: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  color: #000;
+}
+
+.page-root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.home-frame {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #000;
+  overflow: hidden;
+}
+
+/* 배경 레이어 (z-index: 0) - B KING, 원형 로고, 큰 원, 미농님은 지금 */
+.home-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.home-bg-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 미농님은 지금 - (B KING, 원형)과 8px 간격 */
+.home-bg-text {
+  position: absolute;
+  left: 11.5%;
+  top: 13.2%;
+  margin: 0;
+  font-family: "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: #fff;
+}
+
+/* 책 인덱스 레이어 (z-index: 1) - 배경 위에 올라옴 */
+.book-index-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.book-index-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 45vh;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+/* 버튼 클릭 영역 */
+.book-index-btn {
+  cursor: pointer;
+}
+
+.book-index-btn.hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 방 이름 오버레이 - writing-mode: vertical-rl */
+.book-index-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.book-index-label {
+  position: absolute;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: translate(-50%, -50%) skewY(-16deg);
+  color: #000;
+  text-align: center;
+  font-family: "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  letter-spacing: 4.8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 140px;
+}
+
+.book-index-label.hidden {
+  display: none;
+}
+
+/* 유색 path 가로 정중앙 (viewBox 393x386)
+   skewY(-16deg)로 왼쪽 치우침 → 약 1~2%만 오른쪽 보정 */
+/* btn-pink: 핑크 path x 71~118.5 → 중심 24.1% */
+#labelPink {
+  left: 25%;
+  top: 42%;
+}
+
+/* btn-blue: 시안 path x 143~190 → 중심 42.4% */
+#labelBlue {
+  left: 44%;
+  top: 31%;
+}
+
+/* btn-green: 연두 path x 215~262.5 → 중심 60.8% */
+#labelGreen {
+  left: 62%;
+  top: 33%;
+}
+
+/* btn-yellow: 노랑 path x 287~335 → 중심 79.1% */
+#labelYellow {
+  left: 80%;
+  top: 21%;
+}

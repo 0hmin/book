@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 200;
+  src: local("Pretendard ExtraLight"), local("Pretendard-ExtraLight");
+}
+
 :root {
   --bg-page: #f3f4f6;
   --bg-app: #000000;
@@ -23,8 +30,8 @@ body {
 
 body {
   background: var(--bg-page);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   color: var(--text-main);
 }
 
@@ -101,6 +108,11 @@ body {
   align-items: center;
 }
 
+.book-cover-wrap {
+  position: relative;
+  display: inline-block;
+}
+
 .book-cover-btn {
   border: none;
   padding: 0;
@@ -129,6 +141,22 @@ body {
   text-align: center;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.85);
+}
+
+/* 책 사진 공유 인덱스 - 멤버 색상 칩 (20*10) 세로 쌓기, 책 상단-15px에서 시작 */
+.book-photo-index {
+  position: absolute;
+  left: 100%;
+  top: 15px;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.book-photo-index-chip {
+  width: 20px;
+  height: 10px;
 }
 
 .book-hint {
@@ -186,14 +214,13 @@ body {
   width: 370px;
 }
 
-
 .member-item.reading {
   align-self: flex-end;
   margin-right: 0;
 }
 
 .member-item.reading .member-row {
-  width: 295px;
+  width: 370px;
 }
 
 .member-row {
@@ -202,22 +229,24 @@ body {
   background: #ffffff;
   color: #000000;
   min-height: 44px;
+  height: 44px;
   display: grid;
   grid-template-columns: 70px 1fr;
-  align-items: center;
+  align-items: stretch;
   gap: 8px;
   position: relative;
 }
 
 .member-row .member-chip {
-  align-self: center;
+  align-self: stretch;
+  height: auto;
 }
 
 .member-chip {
   width: 70px;
-  height: 38px;
   min-width: 70px;
-  min-height: 38px;
+  height: 44px;
+  min-height: 44px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -227,6 +256,7 @@ body {
   border: none;
   padding: 0;
   cursor: pointer;
+  font-weight: 200;
   color: #000000;
 }
 
@@ -274,7 +304,9 @@ body {
 
 .member-status {
   position: absolute;
-  left: 30%;
+  left: calc(70px + 8px);
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 16px;
   letter-spacing: 0.25em;
   white-space: nowrap;
@@ -308,7 +340,9 @@ body {
 }
 
 .member-row.main .member-chip {
-  align-self: flex-start;
+  align-self: center;
+  height: 44px;
+  min-height: 44px;
 }
 
 /* 첫 줄: 칩 + READING.../fin! + 사진 추가 */
@@ -317,7 +351,7 @@ body {
   grid-template-columns: 70px 1fr auto;
   align-items: center;
   gap: 8px;
-  min-height: 38px;
+  min-height: 44px;
 }
 
 .member-photo-link {
@@ -459,7 +493,7 @@ body {
   background: transparent;
   color: #000000;
   box-sizing: border-box;
-  font-family: inherit;
+  font-family: "Pretendard", inherit;
   outline: none;
   align-self: flex-start;
 }
@@ -537,140 +571,6 @@ body {
   padding: 2px 4px;
   font-size: 12px;
   letter-spacing: 0.25em;
-}
-
-/* Bottom sheet */
-.sheet-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  display: none;
-  justify-content: center;
-  align-items: flex-end;
-  z-index: 50;
-}
-
-.sheet-backdrop.open {
-  display: flex;
-}
-
-.sheet {
-  width: 100%;
-  max-width: 430px;
-  background: #111827;
-  color: #ffffff;
-  border-radius: 16px 16px 0 0;
-  padding: 16px 16px 20px;
-}
-
-.sheet-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.sheet-title {
-  font-size: 11px;
-  letter-spacing: 0.25em;
-}
-
-.sheet-close-btn {
-  border: none;
-  background: transparent;
-  color: #e5e7eb;
-  padding: 4px 6px;
-  font-size: 11px;
-  cursor: pointer;
-}
-
-.sheet-section-title {
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  margin-bottom: 4px;
-}
-
-.input,
-.textarea {
-  width: 100%;
-  background: #111827;
-  border: 1px solid #4b5563;
-  color: #ffffff;
-  padding: 8px 10px;
-  font-size: 12px;
-}
-
-.input:disabled,
-.textarea:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background: #0f172a;
-}
-
-.textarea {
-  min-height: 80px;
-  resize: vertical;
-}
-
-.sheet-row {
-  margin-bottom: 10px;
-}
-
-.star-row {
-  display: flex;
-  gap: 6px;
-}
-
-.star-btn {
-  width: 28px;
-  height: 28px;
-  border: 1px solid #d1d5db;
-  background: #111827;
-  color: #d1d5db;
-  cursor: pointer;
-}
-
-.star-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.star-btn.on {
-  border-color: var(--accent-yellow);
-  color: var(--accent-yellow);
-}
-
-.sheet-footer-btn {
-  width: 100%;
-  margin-top: 6px;
-  border: none;
-  padding: 8px 12px;
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  cursor: pointer;
-}
-
-.sheet-footer-btn.primary {
-  background: var(--accent-cyan);
-  color: #000000;
-}
-
-.sheet-footer-btn.secondary {
-  background: var(--accent-lime);
-  color: #000000;
-}
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 4px;
-  margin-top: 4px;
-}
-
-.photo-grid img {
-  width: 100%;
-  height: 56px;
-  object-fit: cover;
 }
 
 @font-face{

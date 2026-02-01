@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>방 만들기</title>
+    <link rel="stylesheet" href="./create-room.css" />
+  </head>
+  <body>
+    <div class="page-root">
+      <main class="create-room-frame">
+        <div class="create-room-content">
+          <h1 class="create-room-title">독서모임 이름을 정해볼까요 ?</h1>
+          <div class="create-room-input-wrap">
+            <input type="text" class="create-room-input" id="roomNameInput" placeholder="" maxlength="6" />
+            <p class="create-room-hint">(최대 6글자)</p>
+          </div>
+          <button type="button" class="create-room-btn" id="completeBtn">완료</button>
+        </div>
+        <div class="create-room-bg" aria-hidden="true">
+          <img src="./assets/bookbg.png" alt="" class="bookbg-img" />
+        </div>
+      </main>
+    </div>
+    <script src="./book-data.js"></script>
+    <script src="./create-room.js"></script>
+  </body>
+</html>

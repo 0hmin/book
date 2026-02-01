@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>독서모임 방 상세</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-root">
+      <!-- 임시: 계정 전환 스위치 (나중에 제거) -->
+      <div class="account-switch">
+        <button type="button" class="account-switch-btn" id="btnViewAsMe">나로 보기</button>
+        <button type="button" class="account-switch-btn" id="btnViewAsFriend">친구로 보기</button>
+      </div>
+
+      <main class="app-frame" aria-label="독서모임 방 상세 페이지">
+        <img src="./assets/roof.png" alt="" class="roof-img" />
+
+        <header class="room-header">
+          <h1 class="room-title" id="roomTitle">독서모임</h1>
+        </header>
+
+        <!-- 책 섹션 -->
+        <section class="book-section" aria-label="현재 읽는 책">
+          <div class="book-cover-wrap">
+            <button
+              type="button"
+              class="book-cover-btn"
+              id="bookButton"
+              aria-label="현재 책"
+            >
+              <div class="book-cover" id="bookCover"></div>
+            </button>
+            <div class="book-photo-index" id="bookPhotoIndex" aria-label="책 사진 공유한 멤버"></div>
+          </div>
+          <p class="book-hint">
+            책을 눌러<br />
+            좋았던 페이지를 공유하세요
+          </p>
+          <div class="book-actions">
+            <button type="button" class="btn btn-primary">책 검색</button>
+          </div>
+        </section>
+
+        <!-- 참여자 섹션 -->
+        <section class="members-section" aria-label="참여자 목록">
+          <ul class="members-list" id="membersList"></ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="./book-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
